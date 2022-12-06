@@ -2,6 +2,8 @@ import { db } from "../db.js"
 import jwt from "jsonwebtoken"
 
 export const register=(req,res)=>{
+    
+    //check existing user
 
     const q="select * from users where phonenumber=? "
 
@@ -33,7 +35,7 @@ export const login=(req,res)=>{
 
         //password check
         //const isPasswordCorrect=compareSync(req.body.password,data[0].password)
-        if(req.body.password==data[0].password) return res.status(400).json("Wrong username or password")
+        if(req.body.password=!data[0].password) return res.status(400).json("Wrong username or password")
         
         const token=jwt.sign({id:data[0].id},"jwtkey");
         const {password,...other}=data[0]
