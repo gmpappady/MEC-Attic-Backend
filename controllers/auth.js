@@ -4,11 +4,11 @@ export const register=(req,res)=>{
 
     const q="select * from users where phonenumber=? "
 
-    db.query(q,[re.body.phonenumber],(err,data)=>{
+    db.query(q,[req.body.phonenumber],(err,data)=>{
         if (err) return res.json(err)
         if (data.length) return res.status(409).json("User exists")
 
-        const q="insert into users ('phonenumber','password','name') values (?)"
+        const q="insert into users (phonenumber,password,name) values (?);"
         const values=[
             req.body.phonenumber,
             req.body.password,
