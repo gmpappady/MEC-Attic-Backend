@@ -1,3 +1,6 @@
+import {db} from "../db.js"
+
+
 export const getItems  =(req,res)=>{
     const q = req.query.cat
     ? "SELECT * FROM items WHERE cat=?"
