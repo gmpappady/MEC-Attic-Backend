@@ -2,7 +2,7 @@ import express from "express"
 import { addItem, deleteItem, getItem, getItems, updateItem } from "../controllers/item.js"
 const router=express.Router()
 
-router.get("/items",getItems)
+router.get("/",getItems)
 router.get("/:id",getItem)
 router.post("/",addItem)
 router.delete("/:id ",deleteItem)
