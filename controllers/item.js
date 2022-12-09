@@ -14,7 +14,7 @@ export const getItems  =(req,res)=>{
 export const getItem=(req,res)=>{
   console.log(req.params.id)  
   const q =
-    "SELECT id, `name`, `category`, `desc`, img, , seller_id ,  `name`, bargainable`  FROM users u JOIN posts p ON u.id = p.id WHERE p.id = ? ";
+    "SELECT * FROM users  JOIN items  ON users.id = items.seller_id WHERE items.id = ? ";
 
   db.query(q, [req.params.id], (err, data) => {
     if (err) 
@@ -38,12 +38,12 @@ export const addItem=(req,res)=>{
   //   if (err) return res.status(403).json("Token is not valid!");
 
   console.log("wertyui",req.body)
-  const {name,category,price,desc,seller_id}=req.body
+  const {product_name,category,price,desc,seller_id}=req.body
     const q =
-      "INSERT INTO mec-attic.items(name, category, price, desc,seller_id) VALUES (?)";
+      "INSERT INTO items(product_name, category, price, descr,seller_id) VALUES (?)";
 
     const values = [
-      req.body.name,
+      req.body.product_name,
       req.body.category,
       req.body.price,
       req.body.desc,
@@ -55,6 +55,7 @@ export const addItem=(req,res)=>{
         console.log(err) 
         return res.status(500).json(err);
       }
+      console.log("data",data);
       return res.json("Post has been created.");
     });
   
